@@ -10,7 +10,7 @@ class Problem(Base):
 
 class ProblemRevision(Base):
     __tablename__ = 'problem_revisions'
-    title = Column(Unicode(100))
+    description = Column(Unicode(100))
     code = Column(UnicodeText())
     template = Column(UnicodeText())
     timestamp = Column(DateTime(timezone = True))
