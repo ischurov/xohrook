@@ -3,9 +3,11 @@ from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, Unicode, UnicodeText, DateTime, Boolean
 
 class Problem(Base):
+    __tablename__ = 'problems'
     revisions = relationship("ProblemRevision", backref = "problem")
 
 class ProblemRevision(Base):
+    __tablename__ = 'problem_revisions'
     title = Column(Unicode(100))
     code = Column(UnicodeText())
     template = Column(UnicodeText())
@@ -13,6 +15,3 @@ class ProblemRevision(Base):
 
     def formatted():
         raise NotImplemented
-
-if __name__ == '__main__':
-    assert Problem.__table__.name == 'problem'
