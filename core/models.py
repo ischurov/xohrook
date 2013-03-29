@@ -1,5 +1,6 @@
 from sqlalchemy.ext.declarative import declared_attr, declarative_base
-from sqlalchemy import Column, Integer, Unicode, UnicodeText
+from sqlalchemy.orm import relationship
+from sqlalchemy import Column, Integer, Unicode, UnicodeText, DateTime
 import re
 
 class Base(object):
@@ -12,14 +13,14 @@ class Base(object):
 Base = declarative_base(cls = Base)
 
 class Problem(Base):
+    revisions = relationship("ProblemRevision", backref = "problem")
+
+class ProblemRevision(Base):
     title = Column(Unicode(100))
     code = Column(UnicodeText())
-    task = Column(UnicodeText())
+    template = Column(UnicodeText())
+    timestamp = Column(DateTime(timezone = True))
 
-    solution_code = Column(UnicodeText())
-    solution = Column(UnicodeText())
-    answer = Column(UnicodeText())
-    
     def formatted():
         raise NotImplemented
 
