@@ -1,16 +1,6 @@
-from sqlalchemy.ext.declarative import declared_attr, declarative_base
+from model_base import Base
 from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, Unicode, UnicodeText, DateTime
-import re
-
-class Base(object):
-    @declared_attr
-    def __tablename__(cls):
-        """Automatically convert MyClass to my_class"""
-        return re.sub( r'([a-z])([A-Z])', r'\1_\2', cls.__name__).lower()
-    id = Column(Integer, primary_key = True)
-
-Base = declarative_base(cls = Base)
+from sqlalchemy import Column, Integer, Unicode, UnicodeText, DateTime, Boolean
 
 class Problem(Base):
     revisions = relationship("ProblemRevision", backref = "problem")
