@@ -11,15 +11,21 @@ class Problem(Base):
 
 class ProblemRevision(Base):
     __tablename__ = 'problem_revisions'
+    timestamp = Column(DateTime(timezone = True))
+    problem_id = Column(Integer, ForeignKey(Problem.id))
+
+    author_id = Column(Integer, ForeignKey(User.id))
+    author = relationship("User")
+
     description = Column(Unicode(100))
     code = Column(UnicodeText())
     template = Column(UnicodeText())
-    timestamp = Column(DateTime(timezone = True))
-    author_id = Column(Integer, ForeignKey(User.id))
-    author = relationship(author_id)
 
     def generate(randomseed = None, output = 'HTML'):
         pp = Preprocessor()
         preprocessed = pp.process(code, template, seed)
         mp = Markup()
         return mp.process(preprocessed, output)
+
+if __name__ == '__main__':
+    p = Problem()
