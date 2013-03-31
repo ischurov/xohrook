@@ -3,6 +3,7 @@ from sqlalchemy import Column, Integer
 import re
 
 class Base(object):
+    """Base class for all our ORM classes. Currently defines only 'id' primary key"""
     id = Column(Integer, primary_key = True)
 
 Base = declarative_base(cls = Base)

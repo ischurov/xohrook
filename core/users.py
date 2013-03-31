@@ -2,6 +2,11 @@ from model_base import Base
 from sqlalchemy.orm import relationship
 from sqlalchemy import Boolean, Column, Integer, Unicode, Table, ForeignKey
 
+"""
+User management.
+
+Currently, we follow UNIX model, where we just have users and groups.
+"""
 class User(Base):
     __tablename__ = 'users'
     login = Column(Unicode(50), unique = True) # TODO: regexp
