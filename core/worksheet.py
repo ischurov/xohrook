@@ -7,6 +7,11 @@ from users import User
 from preprocessor import Preprocessor
 from problems import Problem, ProblemRevision
 
+"""
+Worksheet is a collection of problems with some text to glue them.
+
+In the future, we shall use it to generate homeworks and exams.
+"""
 class Worksheet(Base):
     __tablename__ = 'worksheets'
     revisions = relationship("WorksheetRevision", backref = "worksheet")
