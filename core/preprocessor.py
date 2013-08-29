@@ -6,7 +6,11 @@ class PreprocessorException(Exception):
         pass
 
 class Preprocessor:
-    """Dummy Preprocessor class."""
+    """
+    A preprocessor based on Jinja2 templates.
+
+    Currently, the code is very insecure, so do not process untrusted strings!
+    """
     def __init__(self):
         pass
 
