@@ -48,7 +48,14 @@ class WorksheetRevision(Base):
         text = pp.process(None, template, {title: title})
         mk = Markup()
         text = mk.process(text)
-        re.sub(problem_re, lambda obj: problems[obj.group(0)])
+        text = re.sub(problem_re, lambda obj: problems[obj.group(0)], text)
+        return text
+
+    def generate_list(self, students, out):
+        res = {}
+        for student in students:
+            res[student] = self.generate(student, out)
+        return res
 
 if __name__ == '__main__':
     rev = WorksheetRevision()
