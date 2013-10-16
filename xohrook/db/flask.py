@@ -4,7 +4,6 @@ from sqlalchemy.ext.declarative import declarative_base
 
 from .. import app
 
-print "DBURI = %s" % app.config['DBURI']
 engine = create_engine( app.config['DBURI'] )
 db_session = scoped_session( sessionmaker( autocommit = False, autoflush = False, bind = engine ) )
 
