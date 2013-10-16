@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block title %}List of all users{% endblock %}
+{% block body %}
+<ul>
+{% for user in users %}
+<li>User {{ user.login }} has id {{ user.id }}; his full name is {{ user.realname }}.</li>
+{% endfor %}
+</ul>
+{% endblock %}
