@@ -13,3 +13,8 @@ class Users:
     def show(id):
         user = db.User.query.get(id)
         return ( "Hello, %s!" % user.realname )
+
+    @app.route('/users/<login>')
+    def show(login):
+        user = db.User.query.filter(db.User.login == login).first()
+        return ( "Hello, %s!" % user.realname )
