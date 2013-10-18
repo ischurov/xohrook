@@ -8,4 +8,5 @@ app.config.from_pyfile( 'xohrook.cfg' )
 def shutdown_session(exception=None):
     from .db.flask import db_session
     db_session.remove()
+
 from .views import *
