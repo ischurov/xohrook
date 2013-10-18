@@ -3,7 +3,7 @@
 {% block body %}
 <ul>
 {% for user in users %}
-<li>User {{ user.login }} has id {{ user.id }}; his full name is {{ user.realname }}.</li>
+<li>User <a href="{{ url_for('UsersView:index') }}">{{ user.login }}</a> has id {{ user.id }}; his full name is {{ user.realname }}.</li>
 {% endfor %}
 </ul>
 {% endblock %}
