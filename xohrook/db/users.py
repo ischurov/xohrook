@@ -14,6 +14,14 @@ class User(Base):
     email = Column(Unicode(50))
     email_confirmed = Column(Boolean)
 
+    @classmethod
+    def from_id_or_login( cls, id ):
+        try:
+            id = int( id )
+            return cls.query.get( id )
+        except( ValueError ):
+            return cls.query.filter( cls.login == id ).first( )
+
 user_groups = Table(
     'user_groups', Base.metadata,
     Column('user_id', Integer, ForeignKey('users.id')),
