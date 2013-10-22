@@ -1,3 +1,4 @@
+# encoding: utf-8
 import flask
 from flask.ext.classy import FlaskView
 
