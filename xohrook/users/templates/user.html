@@ -1,0 +1,5 @@
+{% extends "layout.html" %}
+{%block title %}{{ user.realname }}{% endblock %}
+{%block body %}
+Hello, {{ user.realname }}! Your id is {{ user.id }}, e-mail is <a href="mailto:{{ user.email }}">{{ user.email }}</a>.
+{%endblock%}

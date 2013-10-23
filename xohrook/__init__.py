@@ -12,5 +12,5 @@ dbm = FlaskSQLA( app )
 
 from .login import LoginManager
 login_manager = LoginManager( app )
-
-from .views import *
+from .users import blueprint as users
+app.register_blueprint( users, url_prefix = '/users' )
