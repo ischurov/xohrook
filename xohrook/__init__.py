@@ -10,4 +10,7 @@ app.config.from_pyfile( 'xohrook.cfg' )
 # Connect to database
 dbm = FlaskSQLA( app )
 
+from .login import LoginManager
+login_manager = LoginManager( app )
+
 from .views import *
