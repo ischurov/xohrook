@@ -24,6 +24,7 @@ class Role(Base, IdMixin, RoleMixin):
 class User(Base, IdMixin, UserMixin):
     __tablename__ = 'user'
     email = Column(Unicode(255), unique = True)
+    realname = Column(Unicode(255))
     password = Column(Unicode(255))
     active = Column(Boolean())
     confirmed_at = Column(DateTime(timezone = True))

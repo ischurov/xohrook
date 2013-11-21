@@ -9,7 +9,7 @@ if app.config['DEBUG']:
         In debug mode, create a test user.
         """
         db.create_all()
-        user = User(email = "test@nodomain.noltd", password = 'password', active = True)
+        user = User(email = "test@nodomain.noltd", password = 'password', realname = "Test user", active = True)
         db.session.add(user)
         db.session.commit()
 
