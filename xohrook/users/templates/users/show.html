@@ -1,0 +1,5 @@
+{% extends 'layout.html' %}
+{% block title %}User {{user.realname}}{% endblock %}
+{% block body %}
+<a href="mailto:{{user.email}}">{{user.realname}}</a>
+{% endblock %}

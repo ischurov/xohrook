@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block title %}List of all users{% endblock %}
+{% block body %}
+<ul>
+{% for user in users %}
+<li><a href="{{ url_for('.get', id = user.id ) }}">{{ user.realname }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
