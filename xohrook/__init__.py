@@ -11,14 +11,10 @@ db = SQLA(app)
 
 security = init_security(app, db)
 
-from flask import abort
-from .models.users import User
-from flask.ext.security import login_required
+from flask import render_template
+@app.route('/')
+def index():
+    return render_template('layout.html')
 
-@app.route('/users/<int:id>')
-@login_required
-def user_get(id):
-    user = User.query.get(id)
-    if user == None:
-        abort(404)
-    return user.email
+from .users import users
+app.register_blueprint(users, url_prefix = '/users')

@@ -3,6 +3,8 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 from .models.base import Base
 
+__all__ = ['SQLA']
+
 class SQLA:
     """
     Very simple Flask - SqlAlchemy bridge.
