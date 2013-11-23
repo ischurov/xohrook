@@ -1,7 +1,9 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.engine import reflection
 
 from .models.base import Base
+import models
 
 __all__ = ['SQLA']
 
@@ -13,7 +15,8 @@ class SQLA:
     """
 
     def __init__(self, app):
-        self.engine = create_engine(app.config['SQLALCHEMY_DATABASE_URI'])
+        self.engine = create_engine(app.config['DATABASE_URI'])
+        self.app = app
         self.session = scoped_session(
             sessionmaker(
                 autocommit = False,
@@ -23,9 +26,34 @@ class SQLA:
             )
         Base.query = self.session.query_property()
         app.teardown_request(self.shutdown_session)
-
-    def create_all(self):
-        return Base.metadata.create_all(bind = self.engine)
+        app.before_first_request(self.seed)
 
     def shutdown_session(self, exception=None):
         self.session.remove()
+
+    def create_tables(self):
+        # Test if database is already initialized
+        insp = reflection.Inspector.from_engine(self.engine)
+        if insp.get_table_names():
+            return False
+        else:
+            Base.metadata.create_all( bind = self.engine )
+            return True
+
+    def seed(self):
+        if not self.create_tables():
+            return
+
+        db_seed = self.app.config['DATABASE_SEED']
+        if not db_seed:
+            app.logger.debug( "No database seed found in `app.config'" )
+            return
+        from bootalchemy.loader import Loader
+        loader = Loader(models)
+        try:
+            loader.from_list( self.session, db_seed )
+            self.session.commit()
+            app.logger.debug( "Successfully loaded database seed from" )
+        except:
+            app.logger.warning( "Failed to load database seed" )
+            pass
