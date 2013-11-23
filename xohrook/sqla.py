@@ -46,14 +46,14 @@ class SQLA:
 
         db_seed = self.app.config['DATABASE_SEED']
         if not db_seed:
-            app.logger.debug( "No database seed found in `app.config'" )
+            self.app.logger.debug( "No database seed found in `app.config'" )
             return
         from bootalchemy.loader import Loader
         loader = Loader(models)
         try:
             loader.from_list( self.session, db_seed )
             self.session.commit()
-            app.logger.debug( "Successfully loaded database seed from" )
+            self.app.logger.debug( "Successfully loaded database seed" )
         except:
-            app.logger.warning( "Failed to load database seed" )
+            self.app.logger.warning( "Failed to load database seed" )
             pass
