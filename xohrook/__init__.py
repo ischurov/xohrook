@@ -2,13 +2,11 @@ from flask import Flask
 
 from .sqla import SQLA
 from .security import init_security
+from .config import init_config
 
 app = Flask(__name__, instance_relative_config = True)
-
-app.config.from_pyfile('xohrook.cfg')
-
+init_config(app)
 db = SQLA(app)
-
 security = init_security(app, db)
 
 from .users import users
