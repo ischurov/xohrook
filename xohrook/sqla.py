@@ -42,6 +42,7 @@ class SQLA:
 
     def seed(self):
         if not self.create_tables():
+            self.app.logger.debug("Database already initialized, skip seeding")
             return
 
         db_seed = self.app.config['DATABASE_SEED']
