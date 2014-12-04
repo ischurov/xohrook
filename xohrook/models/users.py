@@ -3,7 +3,7 @@ from flask.ext.security import Security, SQLAlchemyUserDatastore, UserMixin, Rol
 
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy import Boolean, Column, Integer, Unicode, Table, ForeignKey, DateTime
-from base import Base, IdMixin
+from .base import Base, IdMixin
 
 """
 User and Role models as required by Flask-Security.

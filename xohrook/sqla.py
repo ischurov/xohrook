@@ -3,7 +3,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.engine import reflection
 
 from .models.base import Base
-import models
+from . import models
 
 __all__ = ['SQLA']
 

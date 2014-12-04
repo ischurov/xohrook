@@ -12,6 +12,6 @@ def init_config(app):
         except:
             pass
 
-    for key in buf.iterkeys():
-        if key.isupper():
-            app.config[key] = buf[key]
+    for k, v in buf.items():
+        if k.isupper():
+            app.config[k] = v
